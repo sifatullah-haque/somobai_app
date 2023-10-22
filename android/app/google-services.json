@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "338974166293",
+    "project_id": "somobai",
+    "storage_bucket": "somobai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338974166293:android:2572eb88fe1132e0352d1c",
+        "android_client_info": {
+          "package_name": "com.example.somobai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI9q5JX7qAl0kXR1lWxdf8V4EP32_8Zf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
