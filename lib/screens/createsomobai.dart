@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 import 'package:somobai/screens/home_admin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -24,6 +25,7 @@ class _CreateSomobaiState extends State<CreateSomobai> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Center(
             child: Padding(
@@ -88,6 +90,9 @@ class _CreateSomobaiState extends State<CreateSomobai> {
                   height: 50,
                   width: 200.0,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(ColorIs.basicColor)),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         await FirebaseFirestore.instance
@@ -102,7 +107,10 @@ class _CreateSomobaiState extends State<CreateSomobai> {
                         ));
                       }
                     },
-                    child: Text('Create Somobai'),
+                    child: Text(
+                      'Create Somobai',
+                      style: TextStyle(fontSize: 15.0),
+                    ),
                   ),
                 ),
               ],

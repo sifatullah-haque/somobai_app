@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 
 String? months;
 
@@ -62,151 +63,167 @@ class _AddPaymentState extends State<AddPayment> {
     // months = monthId;
     return SafeArea(
       child: Scaffold(
-          body: SingleChildScrollView(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('members').snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
-              final List<DocumentSnapshot> documents = snapshot.data!.docs;
-              for (int i = 0; i < documents.length; i++) {
-                if (items.length != documents.length) {
-                  items.add((documents[i]["name"]));
-                  // String name = documents[i]["name"];
-                  // String token = documents[i]["push_token"];
-                  // pushNotificationTokens[name] = token;
-                }
-              }
-            }
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 16.0),
-                  Text('Add Payment',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 16.0),
-                  const SizedBox(height: 15),
-                  const Row(
-                    children: [
-                      Text(
-                        'Member Name',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        ' *',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      // iconEnabledColor: Colors.green[700],
-                      // buttonHeight: 58,
-                      isExpanded: true,
-                      hint: const Text('Select a member'),
-                      items: items
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(item),
-                              ))
-                          .toList(),
-                      value: selectedValue,
-                      // selectedItemHighlightColor: Colors.grey[300],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value as String;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Row(
-                    children: [
-                      Text(
-                        'Select Month',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        ' *',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      value: selectedMonth,
-                      items: months.map((String month) {
-                        return DropdownMenuItem<String>(
-                          value: month,
-                          child: Text(month),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedMonth = newValue;
-                        });
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _amountController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(labelText: 'Enter Amount'),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter valid amount';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        await FirebaseFirestore.instance
-                            .collection('payments')
-                            .doc('$selectedValue')
-                            .collection('payment')
-                            .doc('$selectedMonth')
-                            .set({
-                          'name': selectedValue,
-                          'month': selectedMonth,
-                          'amount': _amountController.text,
-                        });
-
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Amount successfully added.'),
-                        ));
-                      },
-                      child: Text('Submit')),
-                ],
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Add Payment",
+              style: TextStyle(
+                fontSize: 20.0,
               ),
-            );
-          },
-        ),
-      )),
+            ),
+            backgroundColor: ColorIs.basicColor,
+          ),
+          body: SingleChildScrollView(
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('members').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  for (int i = 0; i < documents.length; i++) {
+                    if (items.length != documents.length) {
+                      items.add((documents[i]["name"]));
+                      // String name = documents[i]["name"];
+                      // String token = documents[i]["push_token"];
+                      // pushNotificationTokens[name] = token;
+                    }
+                  }
+                }
+                return Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
+                      const SizedBox(height: 15),
+                      const Row(
+                        children: [
+                          Text(
+                            'Member Name',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            ' *',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          // iconEnabledColor: Colors.green[700],
+                          // buttonHeight: 58,
+                          isExpanded: true,
+                          hint: const Text('Select a member'),
+                          items: items
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(item),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          // selectedItemHighlightColor: Colors.grey[300],
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value as String;
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            'Select Month',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            ' *',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          value: selectedMonth,
+                          items: months.map((String month) {
+                            return DropdownMenuItem<String>(
+                              value: month,
+                              child: Text(month),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedMonth = newValue;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 16.0),
+                      TextFormField(
+                        controller: _amountController,
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(labelText: 'Enter Amount'),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter valid amount';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                        width: 150.0,
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStatePropertyAll(
+                                    ColorIs.basicColor)),
+                            onPressed: () async {
+                              await FirebaseFirestore.instance
+                                  .collection('payments')
+                                  .doc('$selectedValue')
+                                  .collection('payment')
+                                  .doc('$selectedMonth')
+                                  .set({
+                                'name': selectedValue,
+                                'month': selectedMonth,
+                                'amount': _amountController.text,
+                              });
+
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text('Amount successfully added.'),
+                              ));
+                            },
+                            child: Text('Add')),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )),
     );
   }
 }

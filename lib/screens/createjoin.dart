@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 import 'package:somobai/screens/createsomobai.dart';
 import 'package:somobai/screens/joinsomobai.dart';
 
@@ -18,6 +19,20 @@ class CreateJoin extends StatelessWidget {
                 "assets/logo.png",
                 width: 150,
               ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "somo",
+                    style: TextStyle(color: Colors.green, fontSize: 30.0),
+                  ),
+                  Text(
+                    "Bai",
+                    style: TextStyle(color: ColorIs.basicColor, fontSize: 30.0),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 50.0,
               ),
@@ -25,6 +40,9 @@ class CreateJoin extends StatelessWidget {
                 height: 50.0,
                 width: 200.0,
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(ColorIs.basicColor)),
                   onPressed: () {
                     Navigator.push(
                         context,
@@ -42,6 +60,9 @@ class CreateJoin extends StatelessWidget {
                 height: 50.0,
                 width: 200.0,
                 child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(ColorIs.basicColor)),
                   onPressed: () {
                     Navigator.push(
                         context,

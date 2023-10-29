@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 import 'package:somobai/screens/paymentDetail.dart';
 import 'package:somobai/screens/payment_option.dart';
 
@@ -56,131 +57,147 @@ class _ViewPaymentState extends State<ViewPayment> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text(
+              "View Payments",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            backgroundColor: ColorIs.basicColor,
+          ),
           body: SingleChildScrollView(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('members').snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
-              final List<DocumentSnapshot> documents = snapshot.data!.docs;
-              for (int i = 0; i < documents.length; i++) {
-                if (items.length != documents.length) {
-                  items.add((documents[i]["name"]));
-                  // String name = documents[i]["name"];
-                  // String token = documents[i]["push_token"];
-                  // pushNotificationTokens[name] = token;
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('members').snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                  for (int i = 0; i < documents.length; i++) {
+                    if (items.length != documents.length) {
+                      items.add((documents[i]["name"]));
+                      // String name = documents[i]["name"];
+                      // String token = documents[i]["push_token"];
+                      // pushNotificationTokens[name] = token;
+                    }
+                  }
                 }
-              }
-            }
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 16.0),
-                  Text('View Payment',
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 16.0),
-                  const SizedBox(height: 15),
-                  const Row(
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Member Name',
-                        style: TextStyle(
-                          fontSize: 15,
+                      const SizedBox(height: 32.0),
+                      const SizedBox(height: 15),
+                      const Row(
+                        children: [
+                          Text(
+                            'Member Name',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            ' *',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          // iconEnabledColor: Colors.green[700],
+                          // buttonHeight: 58,
+                          isExpanded: true,
+                          hint: const Text('Select a member'),
+                          items: items
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(item),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          // selectedItemHighlightColor: Colors.grey[300],
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value as String;
+                            });
+                          },
                         ),
                       ),
-                      Text(
-                        ' *',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.red,
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            'Select Month',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          Text(
+                            ' *',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          value: selectedYear,
+                          items: year.map((String year) {
+                            return DropdownMenuItem<String>(
+                              value: year,
+                              child: Text(year),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedYear = newValue;
+                            });
+                          },
                         ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      SizedBox(
+                        height: 50.0,
+                        width: 150.0,
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(ColorIs.basicColor),
+                            ),
+                            onPressed: () async {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentDetail(
+                                        name: selectedValue ?? ''),
+                                  ));
+                            },
+                            child: const Text(
+                              'view',
+                              style: TextStyle(fontSize: 20.0),
+                            )),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      // iconEnabledColor: Colors.green[700],
-                      // buttonHeight: 58,
-                      isExpanded: true,
-                      hint: const Text('Select a member'),
-                      items: items
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(item),
-                              ))
-                          .toList(),
-                      value: selectedValue,
-                      // selectedItemHighlightColor: Colors.grey[300],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedValue = value as String;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Row(
-                    children: [
-                      Text(
-                        'Select Month',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        ' *',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      value: selectedYear,
-                      items: year.map((String year) {
-                        return DropdownMenuItem<String>(
-                          value: year,
-                          child: Text(year),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedYear = newValue;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  PaymentDetail(name: selectedValue ?? ''),
-                            ));
-                      },
-                      child: Text('Submit')),
-                ],
-              ),
-            );
-          },
-        ),
-      )),
+                );
+              },
+            ),
+          )),
     );
   }
 }

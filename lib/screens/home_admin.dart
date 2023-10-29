@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 import 'package:somobai/added_by_sifat/update_view_profile.dart';
 import 'package:somobai/screens/mymember.dart';
 import 'package:somobai/screens/myprofile.dart';
@@ -22,7 +23,7 @@ class _HomeAdminState extends State<HomeAdmin> {
             padding: const EdgeInsets.only(left: 8.0),
             child: CircleAvatar(
               radius: 50.0,
-              backgroundColor: Colors.amberAccent,
+              backgroundImage: AssetImage("assets/joy.jpg"),
             ),
           ),
           title: const Column(
@@ -43,6 +44,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                   size: 35.0,
                 ))
           ],
+          backgroundColor: ColorIs.basicColor,
         ),
       ),
       body: SafeArea(
@@ -65,7 +67,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                           ),
                         );
                       },
-                      child: Column(
+                      child: const Column(
                         children: [
                           Icon(
                             Icons.account_circle_rounded,
@@ -78,7 +80,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 50.0,
                     ),
                     GestureDetector(

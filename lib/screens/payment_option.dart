@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 import 'package:somobai/screens/addPayment.dart';
 import 'package:somobai/screens/viewPayment.dart';
 
@@ -17,7 +18,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Payment"),
+        title: Text("Payment", style: TextStyle(fontSize: 20.0)),
+        backgroundColor: ColorIs.basicColor,
       ),
       body: SafeArea(
         child: Container(
@@ -30,6 +32,9 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                   height: 50.0,
                   width: 200.0,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(ColorIs.basicColor)),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => AddPayment(),
@@ -45,6 +50,9 @@ class _PaymentOptionsState extends State<PaymentOptions> {
                   height: 50.0,
                   width: 200.0,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(ColorIs.basicColor)),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => ViewPayment(),

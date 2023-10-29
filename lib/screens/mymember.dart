@@ -21,7 +21,7 @@ class _MyMemberState extends State<MyMember> {
         centerTitle: true,
         title: const Text("My Member",
             style: TextStyle(
-                fontSize: 24.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 color: Colors.white)),
         backgroundColor: ColorIs.basicColor,
@@ -49,7 +49,7 @@ class _MyMemberState extends State<MyMember> {
                     },
                     child: const Text('Add Member',
                         style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
                   ),
@@ -73,7 +73,7 @@ class _MyMemberState extends State<MyMember> {
                     },
                     child: const Text('View Member',
                         style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)),
                   ),

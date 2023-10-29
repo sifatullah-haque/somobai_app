@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:somobai/added_by_sifat/main_color.dart';
+
 class AddMember extends StatefulWidget {
   const AddMember({super.key});
 
@@ -23,7 +25,8 @@ class _AddMemberState extends State<AddMember> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Add Member"),
+          title: Text("Add Member", style: TextStyle(fontSize: 20.0)),
+          backgroundColor: ColorIs.basicColor,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -97,6 +100,9 @@ class _AddMemberState extends State<AddMember> {
                     height: 50.0,
                     width: 150.0,
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(ColorIs.basicColor)),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await FirebaseFirestore.instance

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:somobai/added_by_sifat/main_color.dart';
 
 class JoinSomobai extends StatefulWidget {
   const JoinSomobai({super.key});
@@ -101,6 +102,9 @@ class _JoinSomobaiState extends State<JoinSomobai> {
                   height: 50.0,
                   width: 200.0,
                   child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(ColorIs.basicColor)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Perform the action when the form is valid.

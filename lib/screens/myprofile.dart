@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'package:somobai/added_by_sifat/main_color.dart';
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -32,6 +34,11 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Update Profile', style: TextStyle(fontSize: 20.0)),
+          centerTitle: true,
+          backgroundColor: ColorIs.basicColor,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -40,9 +47,9 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 16.0),
-                  Text('My Profile',
+                  Text('Enter Your Somobai Profile Details',
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   SizedBox(height: 16.0),
                   TextFormField(
                     controller: _fullNameController,
@@ -131,28 +138,35 @@ class _ProfileState extends State<Profile> {
                     },
                   ),
                   SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await FirebaseFirestore.instance
-                            .collection('members')
-                            .doc('${_mobileNumberController.text}')
-                            .set({
-                          'name': _fullNameController.text,
-                          'mobile': _mobileNumberController.text,
-                          'mail': _emailAddressController.text,
-                          'nid': _nidNumberController.text,
-                        });
+                  SizedBox(
+                    height: 50.0,
+                    width: 150.0,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(ColorIs.basicColor)),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await FirebaseFirestore.instance
+                              .collection('members')
+                              .doc('${_mobileNumberController.text}')
+                              .set({
+                            'name': _fullNameController.text,
+                            'mobile': _mobileNumberController.text,
+                            'mail': _emailAddressController.text,
+                            'nid': _nidNumberController.text,
+                          });
 
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Profile Info Added'),
-                        ));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Profile Info Added'),
+                          ));
 
-                        // Perform the action when the form is valid.
-                        // Access the form data and images here.
-                      }
-                    },
-                    child: Text('Submit'),
+                          // Perform the action when the form is valid.
+                          // Access the form data and images here.
+                        }
+                      },
+                      child: Text('Update', style: TextStyle(fontSize: 15.0)),
+                    ),
                   ),
                 ],
               ),
