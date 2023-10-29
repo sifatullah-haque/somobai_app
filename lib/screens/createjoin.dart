@@ -14,28 +14,43 @@ class CreateJoin extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateSomobai(),
-                      ));
-                },
-                child: Text('Create Somobai'),
+              Image.asset(
+                "assets/logo.png",
+                width: 150,
+              ),
+              SizedBox(
+                height: 50.0,
+              ),
+              SizedBox(
+                height: 50.0,
+                width: 200.0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateSomobai(),
+                        ));
+                  },
+                  child: Text('Create Somobai'),
+                ),
               ),
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => JoinSomobai(),
-                      ));
-                },
-                child: Text('Join Somobai'),
+              SizedBox(
+                height: 50.0,
+                width: 200.0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => JoinSomobai(),
+                        ));
+                  },
+                  child: Text('Join Somobai'),
+                ),
               ),
             ],
           ),

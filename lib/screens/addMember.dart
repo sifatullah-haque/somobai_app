@@ -21,6 +21,10 @@ class _AddMemberState extends State<AddMember> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Add Member"),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -29,9 +33,9 @@ class _AddMemberState extends State<AddMember> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 16.0),
-                  Text('Add Member',
+                  Text('Enter your somobai member details',
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   SizedBox(height: 16.0),
                   TextFormField(
                     controller: _fullNameController,
@@ -89,28 +93,32 @@ class _AddMemberState extends State<AddMember> {
                     },
                   ),
                   SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        await FirebaseFirestore.instance
-                            .collection('members')
-                            .doc('${_mobileNumberController.text}')
-                            .set({
-                          'name': _fullNameController.text,
-                          'mobile': _mobileNumberController.text,
-                          'mail': _emailAddressController.text,
-                          'nid': _nidNumberController.text,
-                        });
+                  SizedBox(
+                    height: 50.0,
+                    width: 150.0,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await FirebaseFirestore.instance
+                              .collection('members')
+                              .doc('${_mobileNumberController.text}')
+                              .set({
+                            'name': _fullNameController.text,
+                            'mobile': _mobileNumberController.text,
+                            'mail': _emailAddressController.text,
+                            'nid': _nidNumberController.text,
+                          });
 
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('New Member Added'),
-                        ));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('New Member Added'),
+                          ));
 
-                        // Perform the action when the form is valid.
-                        // Access the form data and images here.
-                      }
-                    },
-                    child: Text('Submit'),
+                          // Perform the action when the form is valid.
+                          // Access the form data and images here.
+                        }
+                      },
+                      child: Text('Add'),
+                    ),
                   ),
                 ],
               ),

@@ -33,6 +33,13 @@ class _JoinSomobaiState extends State<JoinSomobai> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Image.asset(
+                  "assets/logo.png",
+                  width: 120.0,
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
                 Text('Join Somobai',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -90,15 +97,22 @@ class _JoinSomobaiState extends State<JoinSomobai> {
                   },
                 ),
                 SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Perform the action when the form is valid.
-                      // You can access the name and password using _nameController.text and _passwordController.text.
-                      // Replace this with your actual logic.
-                    }
-                  },
-                  child: Text('Join Somobai'),
+                SizedBox(
+                  height: 50.0,
+                  width: 200.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Perform the action when the form is valid.
+                        // You can access the name and password using _nameController.text and _passwordController.text.
+                        // Replace this with your actual logic.
+                      }
+                    },
+                    child: Text(
+                      'Join Somobai',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -34,6 +34,13 @@ class _CreateSomobaiState extends State<CreateSomobai> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Image.asset(
+                  "assets/logo.png",
+                  width: 120.0,
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
                 Text('Create Somobai',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
@@ -77,22 +84,26 @@ class _CreateSomobaiState extends State<CreateSomobai> {
                   },
                 ),
                 SizedBox(height: 16.0),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await FirebaseFirestore.instance
-                          .collection('somobai')
-                          .add({
-                        'somobai_name': _nameController.text,
-                        'password': _passwordController.text,
-                      });
+                SizedBox(
+                  height: 50,
+                  width: 200.0,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await FirebaseFirestore.instance
+                            .collection('somobai')
+                            .add({
+                          'somobai_name': _nameController.text,
+                          'password': _passwordController.text,
+                        });
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomeAdmin(),
-                      ));
-                    }
-                  },
-                  child: Text('Create Somobai'),
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomeAdmin(),
+                        ));
+                      }
+                    },
+                    child: Text('Create Somobai'),
+                  ),
                 ),
               ],
             ),

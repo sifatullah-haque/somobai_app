@@ -15,6 +15,10 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Payment"),
+      ),
       body: SafeArea(
         child: Container(
           child: Center(
@@ -22,24 +26,32 @@ class _PaymentOptionsState extends State<PaymentOptions> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AddPayment(),
-                    ));
-                  },
-                  child: const Text('Add Payment'),
+                SizedBox(
+                  height: 50.0,
+                  width: 200.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AddPayment(),
+                      ));
+                    },
+                    child: const Text('Add Payment'),
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ViewPayment(),
-                    ));
-                  },
-                  child: const Text('View Payment'),
+                SizedBox(
+                  height: 50.0,
+                  width: 200.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ViewPayment(),
+                      ));
+                    },
+                    child: const Text('View Payment'),
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
